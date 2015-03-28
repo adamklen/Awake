@@ -66,7 +66,7 @@ public class AlarmReceiverActivity extends Activity {
             SparkCoreRest data = new SparkCoreRest();
             // Create a new HttpClient and Post Header
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("https://api.spark.io/v1/devices/" + data.getDeviceID()+"/brew");;
+            HttpPost httppost = new HttpPost("https://api.spark.io/v1/devices/" + data.getDeviceID()+"/alarm");;
 
             try {
                 // Add your data
