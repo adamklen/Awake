@@ -11,7 +11,7 @@
     <TextView android:text="COFFEE WOW" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextClock
+    <TextView
         android:textSize="64sp"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
