@@ -7,13 +7,12 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -74,7 +73,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
             am.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(),
                     pendingIntent);
 
-
+            Toast.makeText(getActivity(), "Alarm set!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -90,6 +89,8 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
 
         alarmTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
         alarmTime.set(Calendar.MINUTE, minute);
+        alarmTime.set(Calendar.SECOND, 0);
+        alarmTime.set(Calendar.MILLISECOND, 0);
 
         if (alarmTime.before(current)){
             alarmTime.add(Calendar.DAY_OF_YEAR, 1);
