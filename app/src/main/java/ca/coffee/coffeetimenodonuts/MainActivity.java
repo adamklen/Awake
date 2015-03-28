@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -28,6 +31,7 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,20 +42,9 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
 
-        Button functionOne = (Button) findViewById(R.id.button);
-        Button functionTwo = (Button) findViewById(R.id.button2);
-        functionOne.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new MyAsyncTask().execute("HIGH");
-                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-            }
-        });
-        functionTwo.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                new MyAsyncTask().execute("LOW");
-                Toast.makeText(getApplicationContext(), "1", Toast.LENGTH_SHORT).show();
-            }
-        });
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+
 
     }
 
@@ -91,42 +84,5 @@ public class MainActivity extends ActionBarActivity {
             return rootView;
         }
     }
-    private class MyAsyncTask extends AsyncTask<String, Integer, Double> {
 
-        @Override
-        protected Double doInBackground(String... params) {
-            // TODO Auto-generated method stub
-            postData(params[0]);
-            return null;
-        }
-
-        protected void onPostExecute(Double result){
-            Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
-        }
-
-        public void postData(String valueIWantToSend) {
-            SparkCoreRest data = new SparkCoreRest();
-            // Create a new HttpClient and Post Header
-            HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("https://api.spark.io/v1/devices/" + data.getDeviceID()+"/digitalwrite");;
-
-            try {
-                // Add your data
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-                nameValuePairs.add(new BasicNameValuePair("access_token", data.getAccessToken()));
-                nameValuePairs.add(new BasicNameValuePair("params", "A7,"+ valueIWantToSend));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-                // Execute HTTP Post Request
-                HttpResponse response = httpclient.execute(httppost);
-
-            } catch (ClientProtocolException e) {
-                // TODO Auto-generated catch block
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-            }
-        }
-
-    }
 }
-

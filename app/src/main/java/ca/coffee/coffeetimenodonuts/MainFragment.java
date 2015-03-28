@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,8 +15,22 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.melnykov.fab.FloatingActionButton;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by ajklen on 3/28/15.
@@ -38,6 +53,8 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
         rootView.findViewById(R.id.button_set).setOnClickListener(this);
         clock = (TextView) rootView.findViewById(R.id.clock);
         clock.setOnClickListener(this);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
         alarmTime = (Calendar) Calendar.getInstance().clone();
         format = android.text.format.DateFormat.getTimeFormat(getActivity().getApplicationContext());
@@ -54,6 +71,9 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
                 setAlarm();
                 return;
             case R.id.clock:
+                setTime();
+                return;
+            case R.id.fab:
                 setTime();
                 return;
             default:
@@ -99,4 +119,5 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
         clock.setText(format.format(alarmTime.getTime()));
 
     }
+
 }
