@@ -3,11 +3,8 @@ package ca.coffee.coffeetimenodonuts;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.Toast;
 
 /**
  * Created by ajklen on 3/28/15.

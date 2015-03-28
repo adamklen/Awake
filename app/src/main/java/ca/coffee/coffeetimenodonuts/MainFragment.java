@@ -57,7 +57,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
                 setTime();
                 return;
             default:
-                return;
+
         }
     }
 

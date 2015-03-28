@@ -19,7 +19,7 @@
         android:id="@+id/clock" />
 
     <Button
-        android:text="Set Alarm"
+        android:text="@string/alarm_set"
         android:id="@+id/button_set"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
