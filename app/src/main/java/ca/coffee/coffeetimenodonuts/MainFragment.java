@@ -84,16 +84,28 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
     private void setAlarm(){
         if (alarmTime != null){
 
-            Intent intent = new Intent(getActivity(), AlarmReceiverActivity.class);
-            PendingIntent pendingIntent = PendingIntent.getActivity(getActivity(),
+            Intent alarmIntent = new Intent(getActivity(), AlarmReceiverActivity.class);
+            Intent coffeeIntent = new Intent(getActivity(), CoffeeReceiverActivity.class);
+
+            PendingIntent alarmPendingIntent = PendingIntent.getActivity(getActivity(),
                     //the number is the alarm ID; any alarms with the same id are overwritten
-                    12345, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                    12345, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+            PendingIntent coffeePendingIntent = PendingIntent.getActivity(getActivity(),
+                    //the number is the alarm ID; any alarms with the same id are overwritten
+                    54321, coffeeIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
             AlarmManager am = (AlarmManager)getActivity().getSystemService(Activity.ALARM_SERVICE);
-            am.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(),
-                    pendingIntent);
 
-            Toast.makeText(getActivity(), "Alarm set!", Toast.LENGTH_SHORT).show();
+            am.set(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(),
+                    alarmPendingIntent);
+
+            Calendar coffeeTime = (Calendar) alarmTime.clone();
+            coffeeTime.add(Calendar.SECOND , -60);
+
+            am.set(AlarmManager.RTC_WAKEUP, coffeeTime.getTimeInMillis(), coffeePendingIntent);
+
+            Toast.makeText(getActivity(), "Alarm set", Toast.LENGTH_SHORT).show();
         }
     }
 

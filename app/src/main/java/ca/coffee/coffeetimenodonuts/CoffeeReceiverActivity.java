@@ -25,9 +25,9 @@ import java.util.List;
 /**
  * Created by ajklen on 3/28/15.
  */
-public class AlarmReceiverActivity extends Activity {
+public class CoffeeReceiverActivity extends Activity {
 
-    public AlarmReceiverActivity() {
+    public CoffeeReceiverActivity() {
 
     }
 
@@ -40,12 +40,10 @@ public class AlarmReceiverActivity extends Activity {
         setContentView(R.layout.activity_alarm);
 
         TextView text = (TextView)findViewById(R.id.textView);
-        text.setTextSize(64f);
-        text.setText("WAKE UP!!!");
+        text.setTextSize(26f);
+        text.setText("Your coffee is getting ready...");
 
-        Log.d("AlarmReceiverActivity", "the thing worked");
-
-
+        Log.d("CoffeeReceiverActivity", "the thing worked");
 
         new HTTPClient().execute("HIGH");
     }
