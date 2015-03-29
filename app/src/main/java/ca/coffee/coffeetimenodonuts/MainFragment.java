@@ -101,7 +101,7 @@ public class MainFragment extends Fragment implements View.OnClickListener, Time
                     alarmPendingIntent);
 
             Calendar coffeeTime = (Calendar) alarmTime.clone();
-            coffeeTime.add(Calendar.SECOND , -60);
+            coffeeTime.add(Calendar.SECOND , -20);
 
             am.set(AlarmManager.RTC_WAKEUP, coffeeTime.getTimeInMillis(), coffeePendingIntent);
 
